@@ -36,3 +36,4 @@ This will automatically:
 1. Build the production bundle into `/dist` (`npm run build`).
 2. Push the built files to the `gh-pages` branch on your GitHub repository.
 3. Make it live on GitHub Pages.
+
