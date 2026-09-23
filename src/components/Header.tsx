@@ -1,18 +1,16 @@
 import React from 'react';
-import { SlidersHorizontal, Mail } from 'lucide-react';
+import { Mail } from 'lucide-react';
 
 interface HeaderProps {
-  onOpenPersonalize: () => void;
+  onOpenPersonalize?: () => void;
   onOpenInbox: () => void;
   replyCount: number;
   recipientName: string;
 }
 
 export const Header: React.FC<HeaderProps> = ({
-  onOpenPersonalize,
   onOpenInbox,
   replyCount,
-  recipientName,
 }) => {
   return (
     <header className="sticky top-0 z-40 bg-[#FAF7F2]/90 backdrop-blur-md border-b border-[#E8DFD5] transition-all">
@@ -50,13 +48,13 @@ export const Header: React.FC<HeaderProps> = ({
           </a>
         </nav>
 
-        {/* Zone 3: Actions - Inbox + Personalize */}
+        {/* Zone 3: Actions - Inbox only */}
         <div className="flex items-center gap-2.5">
           {/* Inbox Button */}
           <button
             onClick={onOpenInbox}
             className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-[#4A443D] bg-[#F1EAE2] hover:bg-[#E7DED4] active:bg-[#DDD2C6] rounded-md transition-colors border border-[#E0D5C9] cursor-pointer relative"
-            title="View replies from Dr. Trunali"
+            title="View replies"
           >
             <Mail className="w-3.5 h-3.5 text-[#8E5A47]" />
             <span className="hidden sm:inline">Inbox</span>
@@ -65,17 +63,6 @@ export const Header: React.FC<HeaderProps> = ({
                 {replyCount}
               </span>
             )}
-          </button>
-
-          {/* Personalize Button */}
-          <button
-            onClick={onOpenPersonalize}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-[#4A443D] bg-[#F1EAE2] hover:bg-[#E7DED4] active:bg-[#DDD2C6] rounded-md transition-colors border border-[#E0D5C9] whitespace-nowrap cursor-pointer"
-            title="Personalize names, email, and details"
-          >
-            <SlidersHorizontal className="w-3.5 h-3.5 text-[#8E5A47]" />
-            <span className="hidden sm:inline">For</span>
-            <span className="font-semibold text-[#221F1B] max-w-[80px] truncate">{recipientName}</span>
           </button>
         </div>
       </div>

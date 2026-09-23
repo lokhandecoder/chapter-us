@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Header } from './components/Header';
 import { HeroLetter } from './components/HeroLetter';
 import { WhyHerSection } from './components/WhyHerSection';
@@ -10,13 +10,12 @@ import { InteractiveComfortGauge } from './components/InteractiveComfortGauge';
 import { GroundRulesAgreement } from './components/GroundRulesAgreement';
 import { ResponseBox } from './components/ResponseBox';
 import { Footer } from './components/Footer';
-import { PersonalizeModal } from './components/PersonalizeModal';
 import { RepliesInboxModal } from './components/RepliesInboxModal';
 import { PersonalizationConfig, SavedResponse } from './types';
 import { defaultPersonalization } from './data/defaultContent';
 
 export default function App() {
-  const [personalization, setPersonalization] = useState<PersonalizationConfig>(() => {
+  const [personalization] = useState<PersonalizationConfig>(() => {
     // Check URL query parameters first
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
@@ -70,17 +69,7 @@ export default function App() {
     return [];
   });
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isInboxOpen, setIsInboxOpen] = useState(false);
-
-  const handleSaveConfig = (newConfig: PersonalizationConfig) => {
-    setPersonalization(newConfig);
-    try {
-      localStorage.setItem('at_your_pace_config', JSON.stringify(newConfig));
-    } catch {
-      // Ignore
-    }
-  };
 
   const handleNewResponse = (response: SavedResponse) => {
     setReplies((prev) => {
@@ -108,7 +97,6 @@ export default function App() {
       {/* Top Bar Navigation */}
       <Header
         recipientName={personalization.recipientName}
-        onOpenPersonalize={() => setIsModalOpen(true)}
         onOpenInbox={() => setIsInboxOpen(true)}
         replyCount={replies.length}
       />
@@ -159,14 +147,6 @@ export default function App() {
 
       {/* Editorial Footer */}
       <Footer recipientName={personalization.recipientName} />
-
-      {/* Personalization Dialog */}
-      <PersonalizeModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        config={personalization}
-        onSave={handleSaveConfig}
-      />
 
       {/* Private Replies Inbox Dialog */}
       <RepliesInboxModal
