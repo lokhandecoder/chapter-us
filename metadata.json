@@ -1,0 +1,6 @@
+{
+  "name": "At Your Pace — A Gentle Letter & Safe Path Forward",
+  "description": "A thoughtful, pressure-free guide explaining genuine affection, addressing attachment fears, establishing reliable safety, and outlining small comfortable steps forward.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
